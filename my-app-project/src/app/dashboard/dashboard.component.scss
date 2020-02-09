@@ -1,0 +1,36 @@
+
+.layout{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    
+}
+.header{
+    min-height: 40px;
+    background-color: cadetblue;
+}
+.main{
+    display: flex;
+    flex-flow: row nowrap;
+    flex:1;
+    .sidebar{
+        flex:0.2;
+        background-color: cornsilk;
+        .nav{
+            list-style: none;
+            padding:0.5rem 1rem;
+            li{
+                margin-bottom: 1rem;
+            }
+            a{
+                color:brown;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+    .content{
+        flex:1;
+        padding: 1rem 1.5rem;
+    }
+}

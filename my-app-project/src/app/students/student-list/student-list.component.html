@@ -1,0 +1,11 @@
+<h3>Students list</h3>
+<a routerLink="/students/student">Create student</a>
+<div>
+  <input type="text" class="student-search-input" placeholder="Search..." [(ngModel)]="searchQuery" (ngModelChange)="search()" />
+</div>
+<ol>
+  <li *ngFor="let student of studentsToShow">
+    <app-student-list-item [student]="student" (click)="studentClicked(student)"></app-student-list-item>
+    <button type="button" (click)="delStudent(student)">Delete student</button>
+  </li>
+</ol>

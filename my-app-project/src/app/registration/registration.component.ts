@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRestService } from '../shared/user-rest.service'
 
 @Component({
   selector: 'app-registration',
@@ -9,11 +10,15 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   form:FormGroup;
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+    private userRestService:UserRestService
+    ) { }
 
   ngOnInit() {
     this.form=new FormGroup({
       login:new FormControl('',Validators.required),
+      firstName:new FormControl('',Validators.required),
+      lastName:new FormControl('',Validators.required),
       password:new FormControl('',Validators.required),
     })
   }
@@ -21,11 +26,19 @@ export class RegistrationComponent implements OnInit {
     if(this.form.invalid){
       return;
     }else{
-      // console.log("ok");
-      localStorage.setItem(this.form.controls['login'].value,this.form.controls['password'].value);
-      // localStorage.setItem('password',);
-      this.router.navigate(['/login']);
+      const newUser = {
+
+        firstName: this.form.get('firstName').value,
+        lastName: this.form.get('lastName').value,
+        username:this.form.get('login').value,
+        password:this.form.get('password').value
+      };
+      this.userRestService.createUser(newUser)
+        .subscribe(res => {
+          // this.router.navigate(['students']);
+          this.router.navigate(['/login']);
+        });
+      }
     }
-  }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ThrowStmt } from '@angular/compiler';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserRestService } from '../shared/user-rest.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
   form:FormGroup;
 
-  constructor( private router:Router) { }
+  constructor( 
+    private router:Router,
+    private userRestService:UserRestService
+    ) { }
 
   ngOnInit() {
 
@@ -24,23 +28,18 @@ export class LoginComponent implements OnInit {
     if(!this.form.valid){
       return;
     }
+    const authUser = {
+      username:this.form.get('login').value,
+      password:this.form.get('password').value
+    };
     
-       var ok=false;
-      for(var i=0;i<localStorage.length;i++){
-         var key=localStorage.key(i);
-         var value=localStorage.getItem(key);
-         if(key==this.form.controls['login'].value && value==this.form.controls['password'].value){
-            ok=true;
-            break;
-         }
-      }
-      // 
-      if(ok){
-        this.router.navigate(['/']);
-        console.log(ok);
-      }else{
-        console.log("not ok");
-      }
+    this.userRestService.auth(authUser).subscribe(res => {
+      
+      console.log(res['token']);
+      localStorage.setItem('token',res['token']);
+      this.router.navigate(['/']);
+    });
+    
   }
   logout(){
     localStorage.clear();

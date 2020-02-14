@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate{
 
     }
     canActivate(route:ActivatedRouteSnapshot):boolean{
-        const auth=localStorage.getItem('admin');
+        const auth=localStorage.getItem('token');
         if(auth){
             return true;
         }else{

@@ -9,6 +9,7 @@ import { Connection } from 'typeorm';
 import { Category } from './models/Category';
 import { QuestionnariesModule } from './questionnaries/questionnaries.module';
 import { Questionnarie } from './models/Questionnarie';
+import { Question } from './models/Question';
 @Module({
   
   imports :[
@@ -18,8 +19,8 @@ import { Questionnarie } from './models/Questionnarie';
         username: "dana",
         password: "VifaLAB7",
         database:"danaDB",
-        entities: [User,Category,Questionnarie],
-        synchronize:false,
+        entities: [User,Category,Questionnarie,Question],
+        synchronize:true,
     }),
     UsersModule,
     QuestionnariesModule,

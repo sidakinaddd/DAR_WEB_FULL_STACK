@@ -6,10 +6,13 @@ import { CategoryService } from "./category.service";
 import { CategoriesController } from "./category.controller";
 import { QuestionnarieService } from "./questionnarie.service";
 import { QuestionnariesController } from "./questionnarie.controller";
+import { Question } from "../models/Question";
+import { QuestionsService } from "./question.service";
+import { QuestionController } from "./quetstion.controller";
 
 @Module({
     imports:[
-        TypeOrmModule.forFeature([Category,Questionnarie]),
+        TypeOrmModule.forFeature([Category,Questionnarie,Question]),
     ],
     exports:[
         TypeOrmModule,
@@ -17,10 +20,12 @@ import { QuestionnariesController } from "./questionnarie.controller";
     controllers:[
         CategoriesController,
         QuestionnariesController,
+        QuestionController
     ],
     providers:[
         CategoryService,
         QuestionnarieService,
+        QuestionsService
     ],
 })
 export class QuestionnariesModule{

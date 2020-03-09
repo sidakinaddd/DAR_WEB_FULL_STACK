@@ -33,7 +33,5 @@ export class CategoryService{
     deleteCategory(id:number){
         return this.categoriesRepository.delete(id);
     }
-    getCategoryQuestionnaries(id:number){
-        // return this.categoriesRepository.
-    }
+    
 }

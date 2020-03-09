@@ -4,9 +4,14 @@ import { User } from '../models/User';
 import { Category } from 'src/models/Category';
 import { QuestionnarieService } from './questionnarie.service'
 import { Questionnarie } from 'src/models/Questionnarie';
+import { QuestionnariesModule } from './questionnaries.module';
+import { QuestionsService } from './question.service';
 @Controller('questionnaries')
 export class QuestionnariesController {
-constructor(private readonly questionnariesService: QuestionnarieService){}
+constructor(
+  private readonly questionnariesService: QuestionnarieService,
+  private readonly questionsService: QuestionsService,
+  ){}
   @Get()
   getAll(){
     return this.questionnariesService.getQuestionnarie();
@@ -26,6 +31,10 @@ constructor(private readonly questionnariesService: QuestionnarieService){}
     return this.questionnariesService.updateQuestionnarie(params.id,questionnarie);
   }
 
+  @Get(':id/questions')
+  getAllQuestions(@Param('id') id){
+    return this.questionsService.getAllQuestions({questionnarieId:id});
+  }
 //   @Delete(':id')
 //   deleteCategory(@Param() params){
 //     return this.categoriesService.deleteCategory(params.id);

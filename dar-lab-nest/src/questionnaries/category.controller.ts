@@ -32,8 +32,10 @@ constructor(
   deleteCategory(@Param('id') id:number){
     return this.categoriesService.deleteCategory(id);
   }
-//   @Get(':id/questionnaries')
-//   getQuestionnaries(@Param('id') id:number){
-//       return this.questionnariesService.getQuestionnarie(categoryId:id);
-//   }
+
+  @Get(':id/questionnairies')
+  getQuestionnairies(@Param('id') id) {
+      return this.questionnariesService.getQuestionnarie(({categoryId: id}));
+  }
+
 }

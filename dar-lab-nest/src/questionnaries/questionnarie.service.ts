@@ -1,20 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Category } from "src/models/Category";
+
 import { Repository } from "typeorm";
-import { threadId } from "worker_threads";
+
 import { Questionnarie } from "src/models/Questionnarie";
+
 
 @Injectable()
 export class QuestionnarieService{
 
     constructor( 
         @InjectRepository(Questionnarie)
-        private readonly questionnarieRepository: Repository<Questionnarie> 
+        private readonly questionnarieRepository: Repository<Questionnarie> ,
+       
     ){}
 
-    getQuestionnarie(): Promise<Questionnarie[]>{
-        return this.questionnarieRepository.find();
+    getQuestionnarie(criteria={}): Promise<Questionnarie[]>{
+        return this.questionnarieRepository.find(criteria);
 
     }
     getOneQuestionnarie(id:number):Promise<Questionnarie>{
@@ -31,7 +33,4 @@ export class QuestionnarieService{
         return this.questionnarieRepository.update(id,data);
     }
 
-    // deleteCategory(id:number){
-    //     return this.categoriesRepository.delete(id);
-    // }
 }

@@ -4,7 +4,7 @@ import { UsersController } from './users.controller';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { User } from './User';
+import { User } from '../models/User';
 //Запросы к базе
 @Injectable()
 export class UserService {

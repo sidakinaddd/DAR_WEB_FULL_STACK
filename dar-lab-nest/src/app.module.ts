@@ -4,8 +4,11 @@ import { AppService } from './app.service';
 import { MathController } from './math.controller';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './users/User';
+import { User } from './models/User';
 import { Connection } from 'typeorm';
+import { Category } from './models/Category';
+import { QuestionnariesModule } from './questionnaries/questionnaries.module';
+import { Questionnarie } from './models/Questionnarie';
 @Module({
   
   imports :[
@@ -15,9 +18,11 @@ import { Connection } from 'typeorm';
         username: "dana",
         password: "VifaLAB7",
         database:"danaDB",
-        entities: [User]
+        entities: [User,Category,Questionnarie],
+        synchronize:false,
     }),
-    UsersModule
+    UsersModule,
+    QuestionnariesModule,
   ],
   controllers: [AppController, MathController],
   providers: [AppService],
